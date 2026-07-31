@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -13,6 +14,7 @@ import { ProcessStickySplit } from "@/components/process-sticky-split";
 import { AiCtoTimeline } from "@/components/ai-cto-timeline";
 import { IndustriesIndex } from "@/components/industries-index";
 import { SiteIntro } from "@/components/site-intro";
+import { HeroSection } from "@/components/hero-section";
 
 function Nav({ introReady = true, theme = "light" }: { introReady?: boolean; theme?: "light" | "dark" }) {
   const [scrolled, setScrolled] = useState(false);
@@ -26,24 +28,30 @@ function Nav({ introReady = true, theme = "light" }: { introReady?: boolean; the
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b transition-[background-color,border-color,opacity,color] duration-700 ${
-        scrolled || introReady
-          ? theme === "dark"
-            ? "border-white/10 bg-[#0a0a0a]/90 backdrop-blur-md text-white"
-            : "border-border/80 bg-background/90 backdrop-blur-md text-foreground"
-          : "border-transparent bg-transparent"
-      } ${introReady ? "opacity-100" : "opacity-0"}`}
+      className={`sticky top-0 z-50 transition-[padding] duration-500 ${introReady ? "opacity-100" : "opacity-0"} ${
+        scrolled ? "px-3 pt-3 md:px-6 md:pt-4" : "px-0 pt-0"
+      }`}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-        <a href="#top" id="nav-brand" className="flex items-center gap-2.5">
-          <span
-            id="nav-brand-text"
-            className={`font-display text-[15px] font-semibold tracking-tight transition-colors duration-700 ${
-              theme === "dark" ? "text-white" : "text-foreground"
-            }`}
-          >
-            CoGen Labs
-          </span>
+      <div
+        className={`mx-auto flex h-16 items-center justify-between px-4 sm:px-6 transition-[max-width,border-radius,background-color,border-color,box-shadow,backdrop-filter] duration-500 ${
+          scrolled
+            ? `max-w-4xl rounded-2xl border shadow-soft backdrop-blur-xl ${
+                theme === "dark" ? "border-white/10 bg-[#0a0a0a]/70 text-white" : "border-border/80 bg-background/70 text-foreground"
+              }`
+            : `max-w-7xl rounded-none border-b border-transparent bg-transparent ${
+                theme === "dark" ? "text-white" : "text-foreground"
+              }`
+        }`}
+      >
+        <a href="#top" id="nav-brand" className="relative block h-7 w-[130px] overflow-hidden rounded-sm sm:h-8 sm:w-[148px]" aria-label="CoGenlabs home">
+          <Image
+            src={theme === "dark" ? "/logo_with_name_darkmode.png" : "/full_logo_with name.png"}
+            alt="CoGenlabs"
+            fill
+            priority
+            sizes="(min-width: 640px) 148px, 130px"
+            className="scale-[1.06] object-cover object-center"
+          />
         </a>
         <nav
           className={`hidden items-center gap-8 md:flex transition-opacity duration-700 ${
@@ -81,10 +89,10 @@ function Nav({ introReady = true, theme = "light" }: { introReady?: boolean; the
           </a>
           <a
             href="#contact"
-            className={`group inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[13px] font-medium transition-[transform,background-color,color] duration-700 ${
+            className={`group inline-flex items-center gap-1.5 rounded-full bg-[#1472fd] px-3 py-1.5 text-[12px] font-medium text-white transition-[transform,background-color,color] duration-700 sm:px-3.5 sm:text-[13px] ${
               theme === "dark"
-                ? "bg-white text-black hover:-translate-y-px"
-                : "bg-foreground text-background hover:-translate-y-px"
+                ? "hover:-translate-y-px hover:bg-[#3690ff]"
+                : "hover:-translate-y-px hover:bg-[#0e60d9]"
             }`}
           >
             Book a call
@@ -137,64 +145,6 @@ function SectionHead({
         </p>
       ) : null}
     </div>
-  );
-}
-
-function Hero() {
-  return (
-    <section id="top" className="relative overflow-hidden border-b border-border">
-      {/* Light atmosphere — soft grid + blueprint lines, not a dashboard */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.45]"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, color-mix(in oklab, var(--foreground) 6%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in oklab, var(--foreground) 6%, transparent) 1px, transparent 1px)",
-          backgroundSize: "56px 56px",
-          maskImage: "radial-gradient(ellipse 80% 70% at 70% 40%, black, transparent 75%)",
-        }}
-      />
-      <svg
-        className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.18]"
-        aria-hidden
-      >
-        <line x1="8%" y1="18%" x2="92%" y2="22%" stroke="currentColor" strokeWidth="1" className="text-foreground" />
-        <line x1="12%" y1="78%" x2="88%" y2="62%" stroke="currentColor" strokeWidth="1" className="text-foreground" />
-        <circle cx="72%" cy="36%" r="120" fill="none" stroke="currentColor" strokeWidth="1" className="text-foreground" />
-        <circle cx="72%" cy="36%" r="200" fill="none" stroke="currentColor" strokeWidth="1" className="text-foreground" />
-      </svg>
-
-      <div className="relative mx-auto flex min-h-[min(88vh,820px)] max-w-7xl flex-col justify-end px-6 pb-20 pt-28 md:pb-28 md:pt-36">
-        <div className="max-w-3xl animate-rise">
-          <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-muted-foreground">
-            AI engineering studio
-          </p>
-          <h1 className="font-display mt-5 text-[clamp(2.5rem,7vw,4.75rem)] font-semibold leading-[0.98] tracking-[-0.04em] text-foreground">
-            Production AI,
-            <br />
-            embedded in your company.
-          </h1>
-          <p className="mt-6 max-w-xl text-[16.5px] leading-relaxed text-muted-foreground">
-            CoGen Labs designs, ships, and operates the systems behind your AI roadmap — from first
-            architecture to durable scale.
-          </p>
-          <div className="mt-9 flex flex-wrap items-center gap-3">
-            <a
-              href="#contact"
-              className="group inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-3 text-[14px] font-medium text-background transition-transform hover:-translate-y-px"
-            >
-              Book a call
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </a>
-            <a
-              href="#solutions"
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-background/80 px-5 py-3 text-[14px] font-medium text-foreground transition-colors hover:bg-accent"
-            >
-              Explore solutions
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
   );
 }
 
@@ -524,7 +474,7 @@ export function HomePage() {
       <SiteIntro onComplete={() => setIntroReady(true)} />
       <Nav introReady={introReady} theme={theme} />
       <main>
-        <Hero />
+        <HeroSection />
         <TrustedBy />
         <SolutionsStack />
         <AiCtoTimeline />

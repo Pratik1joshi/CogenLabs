@@ -1,0 +1,516 @@
+- generic [active] [ref=f5e1]:
+  - generic [ref=f5e2]:
+    - banner [ref=f5e3]:
+      - generic [ref=f5e4]:
+        - link "CoGen Labs" [ref=f5e5] [cursor=pointer]:
+          - /url: "#top"
+        - navigation [ref=f5e7]:
+          - link "Solutions" [ref=f5e8] [cursor=pointer]:
+            - /url: "#solutions"
+          - link "Products" [ref=f5e9] [cursor=pointer]:
+            - /url: "#products"
+          - link "AI CTO" [ref=f5e10] [cursor=pointer]:
+            - /url: "#ai-cto"
+          - link "Industries" [ref=f5e11] [cursor=pointer]:
+            - /url: "#industries"
+          - link "Insights" [ref=f5e12] [cursor=pointer]:
+            - /url: "#insights"
+        - generic [ref=f5e13]:
+          - link "Sign in" [ref=f5e14] [cursor=pointer]:
+            - /url: "#contact"
+          - link "Book a call" [ref=f5e15] [cursor=pointer]:
+            - /url: "#contact"
+    - main [ref=f5e18]:
+      - generic [ref=f5e20]:
+        - generic [ref=f5e21]:
+          - generic [ref=f5e22]: Now orchestrating multi-agent workflows
+          - heading "Production AI, embedded in your company." [level=1] [ref=f5e26]: Production AI,embedded in your company.
+          - paragraph [ref=f5e27]: CoGen Labs designs, ships, and operates the systems behind your AI roadmap — from first architecture to durable scale.
+          - generic [ref=f5e28]:
+            - link "Book a call" [ref=f5e29] [cursor=pointer]:
+              - /url: "#contact"
+            - link "Explore solutions" [ref=f5e32] [cursor=pointer]:
+              - /url: "#solutions"
+          - generic [ref=f5e33]:
+            - generic [ref=f5e34]: AI Agents
+            - generic [ref=f5e38]: Workflows
+            - generic [ref=f5e43]: Automations
+            - generic [ref=f5e46]: Multi-Agent
+            - generic [ref=f5e52]: MCP
+            - generic [ref=f5e55]: Integrations
+        - generic [ref=f5e64]:
+          - generic "OpenAI" [ref=f5e69]
+          - generic "Anthropic" [ref=f5e76]
+          - generic "Docker" [ref=f5e83]
+          - generic "Google Gemini" [ref=f5e90]
+          - generic "Llama" [ref=f5e97]
+          - generic "Redis" [ref=f5e104]
+          - generic "n8n" [ref=f5e111]
+          - generic "Next.js" [ref=f5e118]
+      - generic [ref=f5e122]:
+        - generic [ref=f5e123]: Trusted by engineering teams at
+        - generic [ref=f5e125]:
+          - generic [ref=f5e126]: Northwind
+          - generic [ref=f5e127]: Vantage
+          - generic [ref=f5e128]: Helix Bio
+          - generic [ref=f5e129]: Arclight
+          - generic [ref=f5e130]: Meridian
+          - generic [ref=f5e131]: Portside
+          - generic [ref=f5e132]: Kinetica
+          - generic [ref=f5e133]: Ordell & Co
+          - generic [ref=f5e134]: Northwind
+          - generic [ref=f5e135]: Vantage
+          - generic [ref=f5e136]: Helix Bio
+          - generic [ref=f5e137]: Arclight
+          - generic [ref=f5e138]: Meridian
+          - generic [ref=f5e139]: Portside
+          - generic [ref=f5e140]: Kinetica
+          - generic [ref=f5e141]: Ordell & Co
+      - generic [ref=f5e968]:
+        - generic [ref=f5e969]:
+          - paragraph [ref=f5e970]: Solutions
+          - heading "An engineering partner for the entire AI stack." [level=2] [ref=f5e971]
+        - generic [ref=f5e974]:
+          - article [ref=f5e975]:
+            - generic [ref=f5e976]:
+              - generic [ref=f5e977]:
+                - generic [ref=f5e978]:
+                  - heading "AI Engineering" [level=3] [ref=f5e979]
+                  - paragraph [ref=f5e980]: Production LLM systems.
+                - generic [ref=f5e981]:
+                  - generic [ref=f5e982]: "0"
+                  - generic [ref=f5e983]: "1"
+              - generic [ref=f5e985]:
+                - paragraph [ref=f5e986]: Evals, inference infrastructure, and domain-fit models — built to survive production, not just demos.
+                - link "Talk through your stack" [ref=f5e987] [cursor=pointer]:
+                  - /url: "#contact"
+          - article:
+            - generic:
+              - generic:
+                - generic:
+                  - heading "AI Agents" [level=3]
+                  - paragraph: Agents that behave in production.
+                - generic:
+                  - generic: "0"
+                  - generic: "2"
+              - generic:
+                - generic:
+                  - paragraph: Tool-using agents with memory, guardrails, and human-in-the-loop — observable and controllable at scale.
+                  - link "Talk about agents":
+                    - /url: "#contact"
+          - article:
+            - generic:
+              - generic:
+                - generic:
+                  - heading "Knowledge Systems" [level=3]
+                  - paragraph: Retrieval that grounds answers.
+                - generic:
+                  - generic: "0"
+                  - generic: "3"
+              - generic:
+                - generic:
+                  - paragraph: Enterprise retrieval over documents, code, tickets, and warehouses — with citations you can trust.
+                  - link "Explore knowledge":
+                    - /url: "#contact"
+          - article:
+            - generic:
+              - generic:
+                - generic:
+                  - heading "Workflow Automation" [level=3]
+                  - paragraph: Drop the manual grind.
+                - generic:
+                  - generic: "0"
+                  - generic: "4"
+              - generic:
+                - generic:
+                  - paragraph: Deterministic, observable automations that replace busywork across ops — with full audit trails.
+                  - link "Automate with us":
+                    - /url: "#contact"
+        - generic [ref=f5e1005]:
+          - paragraph [ref=f5e1006]: Also available
+          - generic [ref=f5e1007]:
+            - generic [ref=f5e1011]:
+              - heading "DevOps & Cloud" [level=4] [ref=f5e1012]
+              - paragraph [ref=f5e1013]: IaC, Kubernetes, CI/CD and platform engineering on AWS, GCP and Azure.
+            - generic [ref=f5e1017]:
+              - heading "Cybersecurity" [level=4] [ref=f5e1018]
+              - paragraph [ref=f5e1019]: Threat modelling, SOC 2 readiness and continuous security posture management.
+      - generic [ref=f5e265]:
+        - generic [ref=f5e266]:
+          - paragraph [ref=f5e267]: ( Flagship )
+          - generic [ref=f5e268]:
+            - heading "Embed" [level=2] [ref=f5e269]
+            - paragraph [ref=f5e270]: AI CTO — a senior engineering team, on demand.
+          - paragraph [ref=f5e271]: Embed a CoGen engineering pod inside your company. We own the AI roadmap, ship production systems, and stay to operate them — from first audit to durable scale.
+        - img "AI CTO engagement path from your stack through discovery to scale" [ref=f5e274]:
+          - generic [ref=f5e276]:
+            - generic [ref=f5e278]: Your stack
+            - generic [ref=f5e279]: systems & goals
+          - generic [ref=f5e280]: Brief & hypothesis
+          - generic [ref=f5e283]:
+            - generic [ref=f5e284]: · Discovery
+            - generic [ref=f5e286]: · Architecture
+            - generic [ref=f5e289]: · MVP
+            - generic [ref=f5e292]: · Launch
+            - generic [ref=f5e295]: · Scale
+          - generic [ref=f5e298]: Ship
+          - generic [ref=f5e299]:
+            - generic [ref=f5e300]: Staff+ engineers embedded
+            - generic [ref=f5e301]: Weekly cadence · on-call
+      - generic [ref=f5e303]:
+        - generic [ref=f5e305]:
+          - generic [ref=f5e306]: CoGen Platform
+          - heading "One home for operating and scaling AI systems. However complex." [level=2] [ref=f5e307]
+          - generic [ref=f5e308]:
+            - link "Explore the platform" [ref=f5e309] [cursor=pointer]:
+              - /url: "#cogen-cto"
+            - link "Book a call" [ref=f5e312] [cursor=pointer]:
+              - /url: "#contact"
+        - generic [ref=f5e313]:
+          - complementary [ref=f5e314]:
+            - navigation "Product sections" [ref=f5e315]:
+              - link "CoGen CTO" [ref=f5e320] [cursor=pointer]:
+                - /url: "#cogen-cto"
+              - link "CoGen Flow" [ref=f5e321] [cursor=pointer]:
+                - /url: "#cogen-flow"
+              - link "CoGen Brain" [ref=f5e322] [cursor=pointer]:
+                - /url: "#cogen-brain"
+              - link "CoGen Agents" [ref=f5e323] [cursor=pointer]:
+                - /url: "#cogen-agents"
+              - link "CoGen Vision" [ref=f5e324] [cursor=pointer]:
+                - /url: "#cogen-vision"
+              - link "CoGen Deploy" [ref=f5e325] [cursor=pointer]:
+                - /url: "#cogen-deploy"
+              - link "CoGen Guard" [ref=f5e326] [cursor=pointer]:
+                - /url: "#cogen-guard"
+          - generic [ref=f5e328]:
+            - link "CoGen CTO Roadmap Arch Evals Security Delivery Ops Lead the AI roadmap. AI strategy, architecture and delivery leadership embedded inside your team." [ref=f5e329] [cursor=pointer]:
+              - /url: "#contact"
+              - heading "CoGen CTO" [level=3] [ref=f5e334]
+              - generic [ref=f5e339]:
+                - generic [ref=f5e340]: Roadmap
+                - generic [ref=f5e341]: Arch
+                - generic [ref=f5e342]: Evals
+                - generic [ref=f5e343]: Security
+                - generic [ref=f5e344]: Delivery
+                - generic [ref=f5e345]: Ops
+              - paragraph [ref=f5e352]:
+                - strong [ref=f5e353]: Lead the AI roadmap.
+                - text: AI strategy, architecture and delivery leadership embedded inside your team.
+            - link [ref=f5e358] [cursor=pointer]:
+              - /url: "#contact"
+              - heading "CoGen Flow" [level=3] [ref=f5e365]
+              - paragraph [ref=f5e384]:
+                - strong [ref=f5e385]: Drop manual work.
+                - text: Visual and code-first workflow engine that automates ops with full observability.
+            - link [ref=f5e390] [cursor=pointer]:
+              - /url: "#contact"
+              - heading "CoGen Brain" [level=3] [ref=f5e403]
+              - paragraph [ref=f5e429]:
+                - strong [ref=f5e430]: Present the insights that matter.
+                - text: Enterprise retrieval and reasoning over your documents, code, tickets and warehouse.
+            - link [ref=f5e435] [cursor=pointer]:
+              - /url: "#contact"
+              - heading "CoGen Agents" [level=3] [ref=f5e448]
+              - paragraph [ref=f5e478]:
+                - strong [ref=f5e479]: Agents that behave in production.
+                - text: Tool-using autonomous agents with memory, guardrails and human-in-the-loop.
+            - link [ref=f5e484] [cursor=pointer]:
+              - /url: "#contact"
+              - heading "CoGen Vision" [level=3] [ref=f5e494]
+              - paragraph [ref=f5e516]:
+                - strong [ref=f5e517]: See what documents hide.
+                - text: Multimodal vision and document intelligence for high-stakes review workflows.
+            - link "CoGen Deploy build test canary prod Ship models without glue code. One-click model and service deployments with canaries, rollbacks and SLOs." [ref=f5e522] [cursor=pointer]:
+              - /url: "#contact"
+              - heading "CoGen Deploy" [level=3] [ref=f5e530]
+              - generic [ref=f5e535]:
+                - generic [ref=f5e536]: build
+                - generic [ref=f5e537]: test
+                - generic [ref=f5e538]: canary
+                - generic [ref=f5e539]: prod
+              - paragraph [ref=f5e549]:
+                - strong [ref=f5e550]: Ship models without glue code.
+                - text: One-click model and service deployments with canaries, rollbacks and SLOs.
+            - link "CoGen Guard PII Policy Eval Get accurate, safe calculations. Policy, PII redaction and prompt firewalls aligned to your compliance edge cases." [ref=f5e555] [cursor=pointer]:
+              - /url: "#contact"
+              - heading "CoGen Guard" [level=3] [ref=f5e560]
+              - generic [ref=f5e565]:
+                - generic [ref=f5e566]: PII
+                - generic [ref=f5e567]: Policy
+                - generic [ref=f5e568]: Eval
+              - paragraph [ref=f5e575]:
+                - strong [ref=f5e576]: Get accurate, safe calculations.
+                - text: Policy, PII redaction and prompt firewalls aligned to your compliance edge cases.
+      - generic [ref=f5e582]:
+        - generic [ref=f5e583]:
+          - paragraph [ref=f5e584]: Industries
+          - heading "Built for regulated, high-stakes environments." [level=2] [ref=f5e585]
+          - paragraph [ref=f5e586]: Domain-aware systems where compliance, auditability, and reliability are non-negotiable.
+        - generic [ref=f5e587]:
+          - button "01 Healthcare Clinical workflows, prior auth, HIPAA. HIPAA Clinical Prior auth" [ref=f5e588]:
+            - generic [ref=f5e590]: "01"
+            - heading "Healthcare" [level=3] [ref=f5e591]
+            - paragraph [ref=f5e592]: Clinical workflows, prior auth, HIPAA.
+            - generic [ref=f5e593]:
+              - generic [ref=f5e594]: HIPAA
+              - generic [ref=f5e595]: Clinical
+              - generic [ref=f5e596]: Prior auth
+          - button "02 Finance Ops automation, risk, fraud detection. Risk Fraud Ops" [ref=f5e597]:
+            - generic [ref=f5e599]: "02"
+            - heading "Finance" [level=3] [ref=f5e600]
+            - paragraph [ref=f5e601]: Ops automation, risk, fraud detection.
+            - generic [ref=f5e602]:
+              - generic [ref=f5e603]: Risk
+              - generic [ref=f5e604]: Fraud
+              - generic [ref=f5e605]: Ops
+          - button "03 Education Tutors, admin automation, assessment. Tutors Admin Assess" [ref=f5e606]:
+            - generic [ref=f5e608]: "03"
+            - heading "Education" [level=3] [ref=f5e609]
+            - paragraph [ref=f5e610]: Tutors, admin automation, assessment.
+            - generic [ref=f5e611]:
+              - generic [ref=f5e612]: Tutors
+              - generic [ref=f5e613]: Admin
+              - generic [ref=f5e614]: Assess
+          - button "04 Manufacturing Vision QA, forecasting, MES agents. Vision Forecast MES" [ref=f5e615]:
+            - generic [ref=f5e617]: "04"
+            - heading "Manufacturing" [level=3] [ref=f5e618]
+            - paragraph [ref=f5e619]: Vision QA, forecasting, MES agents.
+            - generic [ref=f5e620]:
+              - generic [ref=f5e621]: Vision
+              - generic [ref=f5e622]: Forecast
+              - generic [ref=f5e623]: MES
+          - button "05 Hospitality Concierge agents, revenue systems. Concierge Revenue" [ref=f5e624]:
+            - generic [ref=f5e626]: "05"
+            - heading "Hospitality" [level=3] [ref=f5e627]
+            - paragraph [ref=f5e628]: Concierge agents, revenue systems.
+            - generic [ref=f5e629]:
+              - generic [ref=f5e630]: Concierge
+              - generic [ref=f5e631]: Revenue
+          - button "06 Government Secure AI, citizen services, records. Secure Citizens Records" [ref=f5e632]:
+            - generic [ref=f5e634]: "06"
+            - heading "Government" [level=3] [ref=f5e635]
+            - paragraph [ref=f5e636]: Secure AI, citizen services, records.
+            - generic [ref=f5e637]:
+              - generic [ref=f5e638]: Secure
+              - generic [ref=f5e639]: Citizens
+              - generic [ref=f5e640]: Records
+          - button "07 Retail Merchandising, catalog, support agents. Merch Catalog Support" [ref=f5e641]:
+            - generic [ref=f5e643]: "07"
+            - heading "Retail" [level=3] [ref=f5e644]
+            - paragraph [ref=f5e645]: Merchandising, catalog, support agents.
+            - generic [ref=f5e646]:
+              - generic [ref=f5e647]: Merch
+              - generic [ref=f5e648]: Catalog
+              - generic [ref=f5e649]: Support
+      - generic [ref=f5e1022]:
+        - generic [ref=f5e1023]:
+          - generic [ref=f5e1024]: Discover
+          - img [ref=f5e1044]:
+            - generic [ref=f5e1050]: arch
+            - generic [ref=f5e1051]: evals
+          - generic [ref=f5e1052]: Build
+          - generic [ref=f5e1083]:
+            - img [ref=f5e1084]:
+              - generic [ref=f5e1087]: "92"
+            - generic [ref=f5e1088]: Refine
+        - generic [ref=f5e1089]:
+          - paragraph [ref=f5e1090]: Process
+          - generic [ref=f5e1091]:
+            - generic [ref=f5e1093]:
+              - paragraph [ref=f5e1094]: 01 — Discover
+              - heading "Map the opportunity." [level=3] [ref=f5e1095]
+              - paragraph [ref=f5e1096]: Workshops, data audit, and ROI so we know what to build and why.
+            - generic [ref=f5e1097]:
+              - generic:
+                - paragraph: 02 — Design
+                - heading [level=3]: Architecture with guardrails.
+                - paragraph: Model choice, security, and eval criteria before a line of production code.
+            - generic [ref=f5e1098]:
+              - generic:
+                - paragraph: 03 — Build
+                - heading [level=3]: Ship in working rhythm.
+                - paragraph: Iterative sprints with weekly demos your team can actually use.
+            - generic [ref=f5e1099]:
+              - generic:
+                - paragraph: 04 — Deploy
+                - heading [level=3]: Live with observability.
+                - paragraph: CI/CD, cloud rollout, monitoring — production from day one of launch.
+            - generic [ref=f5e1100]:
+              - generic:
+                - paragraph: 05 — Refine
+                - heading [level=3]: Improve what moves the needle.
+                - paragraph: Evals, cost, latency, then scale across teams as the system proves itself.
+      - generic [ref=f5e1109]:
+        - generic [ref=f5e1110]:
+          - paragraph [ref=f5e1111]: Outcomes
+          - heading "Case studies" [level=2] [ref=f5e1112]
+          - paragraph [ref=f5e1113]: Real systems shipped into regulated environments, with measurable outcomes.
+          - generic [ref=f5e1114]: Scroll
+        - link "Meridian Bank Autonomous ops for compliance review. Agents triage and resolve compliance cases with human oversight on edge decisions. Finance Agents 84% cases auto-resolved 6.2× faster review time $4.1M annual saving" [ref=f5e1115] [cursor=pointer]:
+          - /url: "#contact"
+          - generic [ref=f5e1134]:
+            - paragraph [ref=f5e1135]: Meridian Bank
+            - heading "Autonomous ops for compliance review." [level=3] [ref=f5e1136]
+            - paragraph [ref=f5e1137]: Agents triage and resolve compliance cases with human oversight on edge decisions.
+          - generic [ref=f5e1142]:
+            - generic [ref=f5e1143]: Finance
+            - generic [ref=f5e1144]: Agents
+          - generic [ref=f5e1145]:
+            - generic [ref=f5e1146]:
+              - generic [ref=f5e1147]: 84%
+              - generic [ref=f5e1148]: cases auto-resolved
+            - generic [ref=f5e1149]:
+              - generic [ref=f5e1150]: 6.2×
+              - generic [ref=f5e1151]: faster review time
+            - generic [ref=f5e1152]:
+              - generic [ref=f5e1153]: $4.1M
+              - generic [ref=f5e1154]: annual saving
+        - link "Helix Bio RAG copilot on 2M clinical documents. Retrieval grounded in clinical corpora with eval harnesses and HIPAA-aligned deploy. Healthcare RAG 38s avg answer time 97.4% eval accuracy HIPAA compliant deploy" [ref=f5e1155] [cursor=pointer]:
+          - /url: "#contact"
+          - generic [ref=f5e1167]:
+            - paragraph [ref=f5e1168]: Helix Bio
+            - heading "RAG copilot on 2M clinical documents." [level=3] [ref=f5e1169]
+            - paragraph [ref=f5e1170]: Retrieval grounded in clinical corpora with eval harnesses and HIPAA-aligned deploy.
+          - generic [ref=f5e1175]:
+            - generic [ref=f5e1176]: Healthcare
+            - generic [ref=f5e1177]: RAG
+          - generic [ref=f5e1178]:
+            - generic [ref=f5e1179]:
+              - generic [ref=f5e1180]: 38s
+              - generic [ref=f5e1181]: avg answer time
+            - generic [ref=f5e1182]:
+              - generic [ref=f5e1183]: 97.4%
+              - generic [ref=f5e1184]: eval accuracy
+            - generic [ref=f5e1185]:
+              - generic [ref=f5e1186]: HIPAA
+              - generic [ref=f5e1187]: compliant deploy
+        - link "Arclight Logistics Agent-driven dispatch and routing. Dispatch agents optimize routes in real time across a national logistics network. Manufacturing Ops -22% delivery cost 3.1× throughput 24/7 autonomous ops" [ref=f5e1188] [cursor=pointer]:
+          - /url: "#contact"
+          - generic [ref=f5e1199]:
+            - paragraph [ref=f5e1200]: Arclight Logistics
+            - heading "Agent-driven dispatch and routing." [level=3] [ref=f5e1201]
+            - paragraph [ref=f5e1202]: Dispatch agents optimize routes in real time across a national logistics network.
+          - generic [ref=f5e1207]:
+            - generic [ref=f5e1208]: Manufacturing
+            - generic [ref=f5e1209]: Ops
+          - generic [ref=f5e1210]:
+            - generic [ref=f5e1211]:
+              - generic [ref=f5e1212]: "-22%"
+              - generic [ref=f5e1213]: delivery cost
+            - generic [ref=f5e1214]:
+              - generic [ref=f5e1215]: 3.1×
+              - generic [ref=f5e1216]: throughput
+            - generic [ref=f5e1217]:
+              - generic [ref=f5e1218]: 24/7
+              - generic [ref=f5e1219]: autonomous ops
+      - generic [ref=f5e858]:
+        - generic [ref=f5e859]:
+          - generic [ref=f5e860]:
+            - generic [ref=f5e861]: Insights
+            - heading "Field notes from the engineering floor." [level=2] [ref=f5e862]
+          - link "All articles" [ref=f5e863] [cursor=pointer]:
+            - /url: "#insights"
+        - generic [ref=f5e867]:
+          - article [ref=f5e868]:
+            - generic [ref=f5e869]:
+              - generic [ref=f5e870]: Jul 18, 2026
+              - generic [ref=f5e872]: 8 min
+              - generic [ref=f5e873]: Architecture
+            - heading "Designing eval-first LLM systems that survive production." [level=3] [ref=f5e874]
+            - paragraph [ref=f5e875]: Why we build the eval harness before the first prompt — and how it changes what ships.
+            - generic [ref=f5e876]: Read
+          - article [ref=f5e880]:
+            - generic [ref=f5e881]:
+              - generic [ref=f5e882]: Jul 04, 2026
+              - generic [ref=f5e884]: 6 min
+              - generic [ref=f5e885]: Agents
+            - 'heading "Tool-first agents: less prompting, more engineering." [level=3] [ref=f5e886]'
+            - paragraph [ref=f5e887]: A pattern for building agents that behave predictably at scale.
+            - generic [ref=f5e888]: Read
+          - article [ref=f5e892]:
+            - generic [ref=f5e893]:
+              - generic [ref=f5e894]: Jun 22, 2026
+              - generic [ref=f5e896]: 10 min
+              - generic [ref=f5e897]: Infrastructure
+            - heading "Running open models economically on Kubernetes." [level=3] [ref=f5e898]
+            - paragraph [ref=f5e899]: Batching, autoscaling and the cost model of self-hosted inference.
+            - generic [ref=f5e900]: Read
+      - generic [ref=f5e905]:
+        - generic [ref=f5e906]: Get in touch
+        - heading "Let's build your AI infrastructure." [level=2] [ref=f5e907]
+        - paragraph [ref=f5e908]: Book a 30-minute strategy call. We'll audit your workflows and show you exactly what a production AI system looks like in your business.
+        - generic [ref=f5e909]:
+          - link "Book a strategy call" [ref=f5e910] [cursor=pointer]:
+            - /url: mailto:hello@cogenlabs.com
+          - link "View technical brief" [ref=f5e913] [cursor=pointer]:
+            - /url: "#solutions"
+        - generic [ref=f5e916]:
+          - generic [ref=f5e917]:
+            - generic [ref=f5e918]: Response time
+            - generic [ref=f5e919]: < 24 hours
+          - generic [ref=f5e920]:
+            - generic [ref=f5e921]: Discovery call
+            - generic [ref=f5e922]: 30 minutes
+          - generic [ref=f5e923]:
+            - generic [ref=f5e924]: First MVP
+            - generic [ref=f5e925]: 6–8 weeks
+    - contentinfo [ref=f5e926]:
+      - generic [ref=f5e927]:
+        - paragraph [ref=f5e928]:
+          - text: Engineering AI systems. Shipping production.
+          - link "Let's build together!" [ref=f5e929] [cursor=pointer]:
+            - /url: mailto:hello@cogenlabs.com
+        - generic [ref=f5e930]:
+          - generic [ref=f5e931]:
+            - strong [ref=f5e932]: New projects
+            - link "hello@cogenlabs.com" [ref=f5e934] [cursor=pointer]:
+              - /url: mailto:hello@cogenlabs.com
+          - generic [ref=f5e935]:
+            - strong [ref=f5e936]: Social
+            - generic [ref=f5e937]:
+              - link "GitHub" [ref=f5e938] [cursor=pointer]:
+                - /url: https://github.com
+              - link "LinkedIn" [ref=f5e939] [cursor=pointer]:
+                - /url: https://www.linkedin.com
+              - link "X" [ref=f5e940] [cursor=pointer]:
+                - /url: https://x.com
+          - generic [ref=f5e941]:
+            - strong [ref=f5e942]: Explore
+            - generic [ref=f5e943]:
+              - link "Solutions" [ref=f5e944] [cursor=pointer]:
+                - /url: "#solutions"
+              - link "Products" [ref=f5e945] [cursor=pointer]:
+                - /url: "#products"
+              - link "AI CTO" [ref=f5e946] [cursor=pointer]:
+                - /url: "#ai-cto"
+              - link "Insights" [ref=f5e947] [cursor=pointer]:
+                - /url: "#insights"
+              - link "Contact" [ref=f5e948] [cursor=pointer]:
+                - /url: "#contact"
+          - generic [ref=f5e949]:
+            - strong [ref=f5e950]: General
+            - link "info@cogenlabs.com" [ref=f5e952] [cursor=pointer]:
+              - /url: mailto:info@cogenlabs.com
+          - generic [ref=f5e953]:
+            - strong [ref=f5e954]: Presence
+            - paragraph [ref=f5e955]: Remote-firstGlobal
+          - generic [ref=f5e956]:
+            - strong [ref=f5e957]: Updates
+            - link "Book a call" [ref=f5e958] [cursor=pointer]:
+              - /url: "#contact"
+        - generic [ref=f5e959]:
+          - paragraph [ref=f5e960]: CoGen Labs
+          - generic [ref=f5e961]:
+            - generic [ref=f5e962]: © 2026 CoGen Labs
+            - generic [ref=f5e963]:
+              - link "Privacy" [ref=f5e964] [cursor=pointer]:
+                - /url: "#contact"
+              - link "Terms" [ref=f5e965] [cursor=pointer]:
+                - /url: "#contact"
+              - link "Security" [ref=f5e966] [cursor=pointer]:
+                - /url: "#contact"
+              - link "Status" [ref=f5e967] [cursor=pointer]:
+                - /url: "#contact"
+  - button "Open Next.js Dev Tools" [ref=f5e1226] [cursor=pointer]
+  - alert [ref=f5e1230]

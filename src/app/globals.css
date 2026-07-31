@@ -41,7 +41,7 @@
 
 :root {
   --radius: 1rem;
-  --background: oklch(0.985 0 0);
+  --background: oklch(100% 0.00011 271.152);
   --foreground: oklch(0.18 0.005 260);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.18 0.005 260);
@@ -208,6 +208,7 @@
     animation: ticker 45s linear infinite;
   }
 
+
   @keyframes motif-scan {
     0% {
       transform: translateY(-120%);
@@ -300,5 +301,28 @@
 
   .animate-motif-tile {
     animation: motif-tile-glow 2s ease-in-out infinite;
+  }
+
+  .hero-grain {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.13) 0.55px, transparent 0.55px);
+    background-size: 5px 5px;
+  }
+
+  @keyframes hero-wheel-turn {
+    to { transform: rotate(-360deg); }
+  }
+
+  .hero-wheel {
+    animation: hero-wheel-turn 30s linear infinite;
+  }
+
+  .hero-wheel-image {
+    /* The source art's hub is ~55% of its radius and the icons sit near the outer rim. */
+    -webkit-mask-image: radial-gradient(circle, transparent 0 40%, #000 40% 100%, transparent 100.8%);
+    mask-image: radial-gradient(circle, transparent 0 40%, #000 40% 100%, transparent 100.8%);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-wheel { animation: none; }
   }
 }
