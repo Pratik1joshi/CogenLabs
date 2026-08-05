@@ -1,9 +1,11 @@
 "use client";
 
-import Image from "next/image";
-import { useLayoutEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 const STORAGE_KEY = "cogen-intro-played";
+/** Scale past the frame so the bottom-right watermark is clipped. */
+const CROP_SCALE = 1.2;
+const MAX_WAIT_MS = 12000;
 
 function shouldPlayIntro() {
   if (typeof window === "undefined" || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return false;
@@ -13,54 +15,85 @@ function shouldPlayIntro() {
 
 export function SiteIntro({ onComplete }: { onComplete: () => void }) {
   const [active, setActive] = useState(false);
-  const [flying, setFlying] = useState(false);
-  const [flyStyle, setFlyStyle] = useState<CSSProperties>({});
-  const logoRef = useRef<HTMLDivElement>(null);
+  const [exiting, setExiting] = useState(false);
+  const finishedRef = useRef(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useLayoutEffect(() => {
-    if (!shouldPlayIntro()) { onComplete(); return; }
+    if (!shouldPlayIntro()) {
+      onComplete();
+      return;
+    }
     setActive(true);
     document.documentElement.style.overflow = "hidden";
-
-    const flyTimer = window.setTimeout(() => {
-      const logo = logoRef.current;
-      const target = document.getElementById("nav-brand");
-      if (!logo || !target) return;
-      const from = logo.getBoundingClientRect();
-      const to = target.getBoundingClientRect();
-      const scale = to.width / from.width;
-      setFlyStyle({
-        transform: `translate3d(${to.left + to.width / 2 - (from.left + from.width / 2)}px, ${to.top + to.height / 2 - (from.top + from.height / 2)}px, 0) scale(${scale})`,
-      });
-      setFlying(true);
-    }, 950);
-
-    const revealTimer = window.setTimeout(onComplete, 2050);
-    const doneTimer = window.setTimeout(() => {
-      sessionStorage.setItem(STORAGE_KEY, "1");
-      document.documentElement.style.overflow = "";
-      setActive(false);
-    }, 2700);
-
     return () => {
-      [flyTimer, revealTimer, doneTimer].forEach(window.clearTimeout);
       document.documentElement.style.overflow = "";
     };
-    // The intro should only run once per page visit; `onComplete` is an inline callback from the page.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (!active) return;
+
+    const finish = () => {
+      if (finishedRef.current) return;
+      finishedRef.current = true;
+      setExiting(true);
+      onComplete();
+
+      window.setTimeout(() => {
+        sessionStorage.setItem(STORAGE_KEY, "1");
+        document.documentElement.style.overflow = "";
+        setActive(false);
+      }, 900);
+    };
+
+    const video = videoRef.current;
+    const failSafe = window.setTimeout(finish, MAX_WAIT_MS);
+
+    if (!video) {
+      finish();
+      return () => window.clearTimeout(failSafe);
+    }
+
+    const onEnded = () => finish();
+    video.addEventListener("ended", onEnded);
+    void video.play().catch(() => finish());
+
+    return () => {
+      window.clearTimeout(failSafe);
+      video.removeEventListener("ended", onEnded);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [active]);
 
   if (!active) return null;
 
   return (
-    <div className={`fixed inset-0 z-[100] overflow-hidden bg-[#f8f7f5] transition-opacity duration-500 ${flying ? "delay-[750ms] opacity-0" : "opacity-100"}`} aria-hidden>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(57,232,130,.12),transparent_30%)]" />
-      <div
-        ref={logoRef}
-        className="absolute left-1/2 top-1/2 h-[100px] w-[100px] -translate-x-1/2 -translate-y-1/2 will-change-transform"
-        style={{ ...flyStyle, transition: flying ? "transform 1150ms cubic-bezier(0.22, 1, 0.36, 1)" : undefined }}
-      >
-        <Image src="/logo.png" alt="" fill priority sizes="290px" className="object-cover object-center" />
+    <div
+      className={`fixed inset-0 z-[100] overflow-hidden bg-white will-change-transform ${
+        exiting ? "pointer-events-none" : ""
+      }`}
+      style={{
+        transform: exiting ? "translate3d(0, -100%, 0)" : "translate3d(0, 0, 0)",
+        transition: exiting ? "transform 850ms cubic-bezier(0.76, 0, 0.24, 1)" : undefined,
+      }}
+      aria-hidden
+    >
+      <div className="absolute inset-0 overflow-hidden bg-white">
+        <video
+          ref={videoRef}
+          src="/scene.mp4"
+          muted
+          playsInline
+          preload="auto"
+          className="absolute left-1/2 top-1/2 h-full w-full max-w-none object-contain"
+          style={{
+            // Scale + nudge so more of the bottom-right is outside the crop frame
+            transform: `translate(calc(-50% - 2%), calc(-50% - 2.5%)) scale(${CROP_SCALE})`,
+            transformOrigin: "center center",
+          }}
+        />
       </div>
     </div>
   );

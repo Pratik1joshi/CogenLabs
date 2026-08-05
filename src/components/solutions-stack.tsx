@@ -8,11 +8,13 @@ type Flagship = {
   title: string;
   lead: string;
   body: string;
+  points: string[];
   cta: string;
   motif: "engine" | "agents" | "knowledge" | "flow";
   surface: string;
   ink: string;
   muted: string;
+  chip: string;
   rotate: number;
 };
 
@@ -22,11 +24,13 @@ const flagships: Flagship[] = [
     title: "AI Engineering",
     lead: "Production LLM systems.",
     body: "Evals, inference infrastructure, and domain-fit models — built to survive production, not just demos.",
+    points: ["Eval harness", "Inference infra", "Domain models"],
     cta: "Talk through your stack",
     motif: "engine",
     surface: "bg-[#f4f2ec] text-[#111]",
     ink: "text-[#111]",
     muted: "text-[#111]/70",
+    chip: "border-black/10 bg-black/[0.06] text-[#111]/80",
     rotate: -16,
   },
   {
@@ -34,11 +38,13 @@ const flagships: Flagship[] = [
     title: "AI Agents",
     lead: "Agents that behave in production.",
     body: "Tool-using agents with memory, guardrails, and human-in-the-loop — observable and controllable at scale.",
+    points: ["Tool use", "Memory", "HITL controls"],
     cta: "Talk about agents",
     motif: "agents",
     surface: "bg-[#dce8f5] text-[#0f172a]",
     ink: "text-[#0f172a]",
     muted: "text-[#0f172a]/70",
+    chip: "border-black/10 bg-black/[0.06] text-[#0f172a]/80",
     rotate: 14,
   },
   {
@@ -46,11 +52,13 @@ const flagships: Flagship[] = [
     title: "Knowledge Systems",
     lead: "Retrieval that grounds answers.",
     body: "Enterprise retrieval over documents, code, tickets, and warehouses — with citations you can trust.",
+    points: ["Docs & code", "Citations", "Warehouse RAG"],
     cta: "Explore knowledge",
     motif: "knowledge",
     surface: "bg-[#e8e4f4] text-[#1a1230]",
     ink: "text-[#1a1230]",
     muted: "text-[#1a1230]/70",
+    chip: "border-black/10 bg-black/[0.06] text-[#1a1230]/80",
     rotate: -11,
   },
   {
@@ -58,11 +66,13 @@ const flagships: Flagship[] = [
     title: "Workflow Automation",
     lead: "Drop the manual grind.",
     body: "Deterministic, observable automations that replace busywork across ops — with full audit trails.",
+    points: ["Deterministic flows", "Observability", "Audit trails"],
     cta: "Automate with us",
     motif: "flow",
     surface: "bg-[#e4efe6] text-[#102016]",
     ink: "text-[#102016]",
     muted: "text-[#102016]/70",
+    chip: "border-black/10 bg-black/[0.06] text-[#102016]/80",
     rotate: 18,
   },
 ];
@@ -95,83 +105,113 @@ function easeOutCubic(t: number) {
 
 function CardMotif({ motif, className }: { motif: Flagship["motif"]; className?: string }) {
   return (
-    <div className={`relative overflow-hidden rounded-2xl ${className ?? ""}`}>
+    <div className={`relative overflow-hidden rounded-xl border border-black/10 bg-white/50 ${className ?? ""}`}>
       <div
-        className="absolute inset-0 opacity-35"
+        className="absolute inset-0 opacity-40"
         style={{
           backgroundImage:
-            "linear-gradient(to right, rgb(0 0 0 / 0.06) 1px, transparent 1px), linear-gradient(to bottom, rgb(0 0 0 / 0.06) 1px, transparent 1px)",
-          backgroundSize: "28px 28px",
+            "linear-gradient(to right, rgb(0 0 0 / 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgb(0 0 0 / 0.05) 1px, transparent 1px)",
+          backgroundSize: "24px 24px",
         }}
       />
 
       {motif === "engine" && (
-        <div className="absolute inset-[12%] flex flex-col gap-2.5">
-          <div className="relative h-2 w-2/5 overflow-hidden rounded bg-black/15">
-            <div className="absolute inset-y-0 left-0 w-1/2 rounded bg-black/35" />
+        <div className="absolute inset-[10%] flex flex-col gap-2.5">
+          <div className="flex items-center justify-between rounded-lg border border-black/10 bg-white/80 px-3 py-2">
+            <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-black/50">Pipeline</span>
+            <span className="rounded bg-black/10 px-1.5 py-0.5 font-mono text-[10px] font-medium">eval pass</span>
           </div>
-          <div className="mt-1 grid flex-1 grid-cols-4 gap-1.5">
-            {Array.from({ length: 8 }).map((_, i) => (
-              <div
-                key={i}
-                className="rounded-md bg-black/15"
-              />
+          <div className="grid flex-1 grid-cols-3 gap-2">
+            {[
+              { l: "Prompt", v: "v12" },
+              { l: "Model", v: "ft-7b" },
+              { l: "Latency", v: "180ms" },
+              { l: "Cost", v: "$0.02" },
+              { l: "Evals", v: "0.94" },
+              { l: "Traffic", v: "canary" },
+            ].map((cell) => (
+              <div key={cell.l} className="flex flex-col justify-between rounded-lg border border-black/10 bg-white/80 px-2.5 py-2">
+                <span className="font-mono text-[9px] uppercase tracking-[0.1em] text-black/45">{cell.l}</span>
+                <span className="mt-1.5 text-[12px] font-semibold text-black/85">{cell.v}</span>
+              </div>
             ))}
           </div>
         </div>
       )}
 
       {motif === "agents" && (
-        <svg className="absolute inset-[10%] h-[80%] w-[80%]" viewBox="0 0 240 180" fill="none" aria-hidden>
-          <path
-            d="M50 90 H110 M130 50 L190 90 M130 130 L190 90"
-            stroke="rgb(0 0 0 / 0.28)"
-            strokeWidth="2"
-            strokeDasharray="8 8"
-          />
-          {[
-            [40, 90, 0],
-            [120, 40, 0.35],
-            [120, 140, 0.7],
-            [200, 90, 1.05],
-          ].map(([x, y, delay], i) => (
-            <circle
-              key={i}
-              cx={x}
-              cy={y}
-              r="10"
-              className="fill-black/30"
-            />
-          ))}
-        </svg>
-      )}
-
-      {motif === "knowledge" && (
-        <div className="absolute inset-[14%] flex flex-col gap-2.5 rounded-xl border border-black/10 bg-white/40 p-3.5">
-          <div className="relative h-2 w-2/5 overflow-hidden rounded bg-black/15">
-            <div className="absolute inset-y-0 w-full origin-left rounded bg-black/30" />
+        <div className="absolute inset-[10%] grid grid-cols-[1fr_0.9fr] gap-2.5">
+          <div className="flex flex-col gap-2 rounded-lg border border-black/10 bg-white/80 p-3">
+            <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-black/45">Agent graph</span>
+            <div className="flex flex-1 flex-col justify-center gap-2">
+              {["Planner", "Tools", "Reviewer"].map((n, i) => (
+                <div key={n} className="flex items-center gap-2">
+                  <span className="grid size-6 place-items-center rounded-full bg-black/15 text-[10px] font-bold">{i + 1}</span>
+                  <span className="text-[12px] font-semibold text-black/85">{n}</span>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="mt-1 space-y-2">
-            {[100, 86, 72, 78].map((w, i) => (
-              <div
-                key={i}
-                className="h-1.5 rounded bg-black/12"
-                style={{ width: `${w}%` }}
-              />
+          <div className="flex flex-col gap-2 rounded-lg border border-black/10 bg-white/80 p-3">
+            <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-black/45">Live</span>
+            {[
+              { l: "Tools", v: "8 active" },
+              { l: "Memory", v: "On" },
+              { l: "HITL", v: "Queued 1" },
+            ].map((row) => (
+              <div key={row.l} className="flex items-center justify-between rounded-md bg-black/[0.05] px-2 py-1.5 text-[11px]">
+                <span className="text-black/55">{row.l}</span>
+                <span className="font-semibold text-black/85">{row.v}</span>
+              </div>
             ))}
           </div>
         </div>
       )}
 
+      {motif === "knowledge" && (
+        <div className="absolute inset-[10%] grid grid-cols-[0.95fr_1.05fr] gap-2.5">
+          <div className="flex flex-col gap-1.5 rounded-lg border border-black/10 bg-white/80 p-3">
+            <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-black/45">Indexed</span>
+            {["Policies.pdf", "tickets.csv", "src/api", "warehouse"].map((s) => (
+              <div key={s} className="rounded-md bg-black/[0.05] px-2 py-1.5 text-[11px] font-medium text-black/80">
+                {s}
+              </div>
+            ))}
+          </div>
+          <div className="flex flex-col justify-between rounded-lg border border-black/10 bg-white/80 p-3">
+            <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-black/45">Answer</span>
+            <p className="text-[12px] leading-snug text-black/80">
+              Clause 4.2 conflicts with internal policy. Cite: Policies.pdf p.11.
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {["docs", "code", "tickets"].map((t) => (
+                <span key={t} className="rounded bg-black/10 px-1.5 py-0.5 font-mono text-[9px] text-black/65">
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
       {motif === "flow" && (
-        <div className="absolute inset-x-[12%] bottom-[16%] top-[20%] flex items-end gap-1.5">
-          {[42, 68, 50, 86, 58, 94, 70].map((h, i) => (
-            <div
-              key={i}
-              className="flex-1 rounded-t-md bg-black/25"
-              style={{ height: `${h}%` }}
-            />
-          ))}
+        <div className="absolute inset-[10%] flex flex-col justify-center gap-2.5">
+          <div className="flex items-center gap-1.5">
+            {["Trigger", "Validate", "Act", "Log"].map((s, i) => (
+              <div key={s} className="flex flex-1 items-center gap-1.5">
+                <div className="flex flex-1 flex-col gap-1 rounded-lg border border-black/10 bg-white/85 px-2 py-2">
+                  <span className="font-mono text-[9px] text-black/45">0{i + 1}</span>
+                  <span className="text-[11px] font-semibold text-black/85">{s}</span>
+                </div>
+                {i < 3 && <div className="hidden h-px w-2 shrink-0 bg-black/25 sm:block" />}
+              </div>
+            ))}
+          </div>
+          <div className="flex h-14 items-end gap-1 rounded-lg border border-black/10 bg-white/70 px-2.5 pb-2 pt-2">
+            {[40, 62, 48, 78, 55, 88, 66, 72].map((h, i) => (
+              <div key={i} className="flex-1 rounded-t-sm bg-black/30" style={{ height: `${h}%` }} />
+            ))}
+          </div>
         </div>
       )}
     </div>
@@ -195,38 +235,49 @@ function ServiceCard({
 
   return (
     <article
+      id={service.id}
       ref={cardRef}
-      className={`${stacked ? "absolute inset-0" : "relative"} flex min-h-[520px] flex-col overflow-hidden rounded-[28px] shadow-[0_24px_60px_-28px_rgb(0_0_0_/0.55)] ${service.surface}`}
+      className={`${stacked ? "absolute inset-0" : "relative"} flex min-h-[460px] flex-col overflow-hidden rounded-[24px] shadow-[0_24px_60px_-28px_rgb(0_0_0_/0.55)] ${service.surface}`}
       style={style}
     >
-      <div className="flex flex-1 flex-col p-7 md:p-9 lg:p-11">
+      <div className="flex flex-1 flex-col p-6 md:p-8 lg:p-9">
         <div className="flex items-start justify-between gap-6">
           <div className="min-w-0 max-w-xl">
-            <h3 className={`font-display text-[clamp(1.75rem,3.5vw,3rem)] font-semibold tracking-tight ${service.ink}`}>
+            <h3 className={`font-display text-[clamp(1.65rem,3.2vw,2.75rem)] font-semibold tracking-tight ${service.ink}`}>
               {service.title}
             </h3>
-            <p className={`mt-2 text-[15px] md:text-[16px] ${service.muted}`}>{service.lead}</p>
+            <p className={`mt-1.5 text-[15px] md:text-[16px] ${service.muted}`}>{service.lead}</p>
           </div>
-          <div className="flex shrink-0 font-mono text-[28px] font-medium tabular-nums leading-none opacity-40 md:text-[36px]">
+          <div className="flex shrink-0 font-mono text-[26px] font-medium tabular-nums leading-none opacity-40 md:text-[32px]">
             <span>{num[0]}</span>
             <span>{num[1]}</span>
           </div>
         </div>
 
-        <div className="mt-8 grid flex-1 gap-6 md:mt-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:items-end md:gap-10">
+        <div className="mt-6 grid flex-1 gap-5 md:mt-7 md:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] md:items-end md:gap-8">
           <div>
-            <p className={`max-w-md text-[14.5px] leading-relaxed md:text-[15.5px] ${service.muted}`}>
+            <p className={`max-w-md text-[14px] leading-relaxed md:text-[15px] ${service.muted}`}>
               {service.body}
             </p>
+            <ul className="mt-3 flex flex-wrap gap-1.5">
+              {service.points.map((point) => (
+                <li
+                  key={point}
+                  className={`rounded-md border px-2 py-1 text-[11px] font-medium ${service.chip}`}
+                >
+                  {point}
+                </li>
+              ))}
+            </ul>
             <a
               href="#contact"
-              className={`group mt-6 inline-flex items-center gap-2 rounded-full border border-black/15 bg-black/5 px-4 py-2.5 text-[13px] font-medium ${service.ink} transition-colors hover:bg-black/10`}
+              className={`group mt-5 inline-flex items-center gap-2 rounded-full border border-black/15 bg-black/5 px-4 py-2.5 text-[13px] font-medium ${service.ink} transition-colors hover:bg-black/10`}
             >
               {service.cta}
               <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
             </a>
           </div>
-          <CardMotif motif={service.motif} className="min-h-[200px] bg-black/[0.04] md:min-h-[280px]" />
+          <CardMotif motif={service.motif} className="min-h-[180px] md:min-h-[240px]" />
         </div>
       </div>
     </article>
@@ -235,10 +286,10 @@ function ServiceCard({
 
 function QuietRow() {
   return (
-    <div className="border-t border-white/10 px-6 py-14">
+    <div className="border-t border-white/10 px-6 py-10">
       <div className="mx-auto max-w-7xl">
         <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-white/40">Also available</p>
-        <div className="mt-6 grid gap-8 sm:grid-cols-2">
+        <div className="mt-5 grid gap-6 sm:grid-cols-2">
           {secondary.map((s) => {
             const Icon = s.icon;
             return (
@@ -246,7 +297,7 @@ function QuietRow() {
                 <Icon className="mt-0.5 h-4 w-4 shrink-0 text-white/35" />
                 <div>
                   <h4 className="font-display text-[16px] font-semibold text-white/80">{s.title}</h4>
-                  <p className="mt-1.5 text-[13.5px] leading-relaxed text-white/45">{s.desc}</p>
+                  <p className="mt-1 text-[13.5px] leading-relaxed text-white/45">{s.desc}</p>
                 </div>
               </div>
             );
@@ -323,12 +374,15 @@ function applyCardPose(el: HTMLElement, progress: number, index: number, total: 
 function VerticalFallback() {
   return (
     <section id="solutions" className="bg-transparent transition-colors duration-1000">
-      <div className="mx-auto max-w-7xl px-6 py-24">
+      <div className="mx-auto max-w-7xl px-6 py-16">
         <p className="font-mono text-[12px] uppercase tracking-[0.18em] text-white/45">Solutions</p>
         <h2 className="mt-3 max-w-2xl font-display text-[clamp(1.85rem,3.5vw,2.75rem)] font-semibold tracking-tight">
           An engineering partner for the entire AI stack.
         </h2>
-        <div className="mt-12 space-y-6">
+        <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-white/55">
+          From model systems to agents, knowledge, and automation — built for production, not slides.
+        </p>
+        <div className="mt-8 space-y-5">
           {flagships.map((s, i) => (
             <ServiceCard key={s.id} service={s} index={i} stacked={false} />
           ))}
@@ -416,11 +470,29 @@ export function SolutionsStack() {
 
   return (
     <section id="solutions" className="bg-transparent transition-colors duration-1000">
-      <div className="mx-auto max-w-7xl px-6 pt-20 pb-6 md:pt-24">
+      <div className="mx-auto max-w-7xl px-6 pt-14 pb-5 md:pt-16">
         <p className="font-mono text-[12px] uppercase tracking-[0.18em] text-white/45">Solutions</p>
         <h2 className="mt-3 max-w-2xl font-display text-[clamp(1.85rem,3.5vw,2.75rem)] font-semibold tracking-tight">
           An engineering partner for the entire AI stack.
         </h2>
+        <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-white/55">
+          From model systems to agents, knowledge, and automation — built for production, not slides.
+        </p>
+        <div className="mt-5 flex flex-wrap gap-3">
+          <a
+            href="#contact"
+            className="group inline-flex items-center gap-2 rounded-lg bg-[#1472fd] px-4 py-2.5 text-[13px] font-semibold text-white transition-transform hover:-translate-y-0.5"
+          >
+            Book a call
+            <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+          </a>
+          <a
+            href="#ai-engineering"
+            className="inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-4 py-2.5 text-[13px] font-semibold text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+          >
+            See capabilities
+          </a>
+        </div>
       </div>
 
       <div ref={trackRef} className="relative" style={{ height: `${flagships.length * 120}vh` }}>
