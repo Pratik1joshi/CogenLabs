@@ -6,10 +6,14 @@ const STORAGE_KEY = "cogen-intro-played";
 /** Scale past the frame so the bottom-right watermark is clipped. */
 const CROP_SCALE = 1.2;
 const MAX_WAIT_MS = 12000;
+/** Must match public/ filename case — Linux (Vercel) is case-sensitive. */
+const INTRO_VIDEO = "/Scene.mp4";
 
 function shouldPlayIntro() {
-  if (typeof window === "undefined" || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return false;
+  if (typeof window === "undefined") return false;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return false;
   const nav = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined;
+  // Play on first visit this session, or any hard reload
   return nav?.type === "reload" || sessionStorage.getItem(STORAGE_KEY) !== "1";
 }
 
@@ -57,12 +61,27 @@ export function SiteIntro({ onComplete }: { onComplete: () => void }) {
     }
 
     const onEnded = () => finish();
+    const onError = () => finish();
+
+    const tryPlay = () => {
+      void video.play().catch(() => {
+        // Autoplay can reject briefly; keep overlay up until ended/error/failSafe.
+        // Do NOT finish here — that caused Vercel to skip when load was slow.
+      });
+    };
+
     video.addEventListener("ended", onEnded);
-    void video.play().catch(() => finish());
+    video.addEventListener("error", onError);
+    video.addEventListener("loadeddata", tryPlay);
+
+    if (video.readyState >= 2) tryPlay();
+    else video.load();
 
     return () => {
       window.clearTimeout(failSafe);
       video.removeEventListener("ended", onEnded);
+      video.removeEventListener("error", onError);
+      video.removeEventListener("loadeddata", tryPlay);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [active]);
@@ -83,13 +102,12 @@ export function SiteIntro({ onComplete }: { onComplete: () => void }) {
       <div className="absolute inset-0 overflow-hidden bg-white">
         <video
           ref={videoRef}
-          src="/scene.mp4"
+          src={INTRO_VIDEO}
           muted
           playsInline
           preload="auto"
           className="absolute left-1/2 top-1/2 h-full w-full max-w-none object-contain"
           style={{
-            // Scale + nudge so more of the bottom-right is outside the crop frame
             transform: `translate(calc(-50% - 2%), calc(-50% - 2.5%)) scale(${CROP_SCALE})`,
             transformOrigin: "center center",
           }}

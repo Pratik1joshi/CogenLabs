@@ -36,6 +36,7 @@
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-instrument), ui-serif, Georgia, serif;
   --font-mono: var(--font-jetbrains), ui-monospace, Menlo, monospace;
 }
 
@@ -108,6 +109,10 @@
   .font-display {
     font-family: var(--font-sans);
     letter-spacing: -0.03em;
+  }
+
+  .font-serif {
+    font-family: var(--font-serif);
   }
 
   .font-mono {
