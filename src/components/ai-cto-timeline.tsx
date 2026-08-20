@@ -10,18 +10,22 @@ const segments = [
   { id: "scale", label: "Scale" },
 ];
 
+/**
+ * Angles: 0 = up. Stay above the axis so labels never sit on segment names.
+ */
 const arcLabels = [
-  { text: "Workflow audit", ring: 0, angle: -118 },
-  { text: "Model selection", ring: 1, angle: -102 },
-  { text: "Evals & guardrails", ring: 2, angle: -88 },
-  { text: "Integrations", ring: 3, angle: -74 },
-  { text: "On-call ops", ring: 4, angle: -58 },
-  { text: "Cost control", ring: 5, angle: -42 },
+  { text: "Workflow audit", ring: 0, angle: -48 },
+  { text: "Model selection", ring: 1, angle: -32 },
+  { text: "Evals & guardrails", ring: 2, angle: -16 },
+  { text: "Integrations", ring: 3, angle: 2 },
+  { text: "On-call ops", ring: 4, angle: 18 },
+  { text: "Cost control", ring: 5, angle: 32 },
 ];
 
-/** Radii grow rightward; all circles touch the same origin on the left */
 const RING_RADII = [95, 150, 215, 290, 375, 470];
 const ANIM_MS = 4500;
+const VB_W = 1320;
+const VB_H = 700;
 
 function clamp01(n: number) {
   return Math.min(Math.max(n, 0), 1);
@@ -47,7 +51,18 @@ function polar(cx: number, cy: number, r: number, deg: number) {
   return { x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad) };
 }
 
-function BlueprintDiagram({ progress }: { progress: number }) {
+/** Counter-rotate labels when the whole SVG is CSS-rotated 90° on mobile */
+function upright(x: number, y: number, enabled: boolean) {
+  return enabled ? `rotate(-90 ${x} ${y})` : undefined;
+}
+
+function BlueprintDiagram({
+  progress,
+  uprightText = false,
+}: {
+  progress: number;
+  uprightText?: boolean;
+}) {
   const a = stagesFromProgress(progress);
   const vbW = 1320;
   const vbH = 780;
@@ -57,15 +72,16 @@ function BlueprintDiagram({ progress }: { progress: number }) {
   const barX1 = 1180;
   const barW = barX1 - barX0;
   const segW = barW / segments.length;
-  /** Shared left touch-point for every expanding arc (start of Discovery) */
   const originX = barX0;
   const drawnBarW = barW * a.bar;
   const insightX = (startCx + 88 + originX) / 2;
+  const shipX = barX0 + segW * 3.05;
+  const shipY = axisY - 72;
 
   return (
     <svg
       viewBox={`0 80 ${vbW} ${vbH - 80}`}
-      className="h-auto w-full max-h-none overflow-visible"
+      className="h-auto w-full overflow-visible"
       role="img"
       aria-label="AI CTO engagement path from your stack through discovery to scale"
     >
@@ -81,7 +97,6 @@ function BlueprintDiagram({ progress }: { progress: number }) {
         />
       ))}
 
-      {/* Arcs share ONE origin: centers sit at originX + r so leftmost point is fixed */}
       {RING_RADII.map((fullR, i) => {
         const grow = clamp01(a.rings * (1.05 - i * 0.04));
         const r = fullR * grow;
@@ -89,7 +104,6 @@ function BlueprintDiagram({ progress }: { progress: number }) {
         const cx = originX + r;
         const cy = axisY;
         const circ = 2 * Math.PI * r;
-        // Draw from the shared left touch-point (west) sweeping upward/right
         return (
           <circle
             key={fullR}
@@ -108,7 +122,6 @@ function BlueprintDiagram({ progress }: { progress: number }) {
         );
       })}
 
-      {/* diagonal guide from shared origin */}
       <line
         x1={originX}
         y1={axisY}
@@ -130,7 +143,6 @@ function BlueprintDiagram({ progress }: { progress: number }) {
         strokeLinecap="round"
       />
 
-      {/* origin node marker */}
       <rect
         x={originX - 3.5}
         y={axisY - 3.5}
@@ -153,6 +165,7 @@ function BlueprintDiagram({ progress }: { progress: number }) {
           x={startCx}
           y={axisY - 10}
           textAnchor="middle"
+          transform={upright(startCx, axisY - 10, uprightText)}
           className="fill-white"
           style={{ fontSize: 20, fontFamily: "var(--font-sans)", fontWeight: 500 }}
         >
@@ -162,6 +175,7 @@ function BlueprintDiagram({ progress }: { progress: number }) {
           x={startCx}
           y={axisY + 16}
           textAnchor="middle"
+          transform={upright(startCx, axisY + 16, uprightText)}
           fill="rgb(255 255 255 / 0.45)"
           style={{ fontSize: 13, fontFamily: "var(--font-mono)" }}
         >
@@ -184,8 +198,9 @@ function BlueprintDiagram({ progress }: { progress: number }) {
         />
         <text
           x={insightX}
-          y={axisY - 18}
+          y={axisY - 22}
           textAnchor="middle"
+          transform={upright(insightX, axisY - 22, uprightText)}
           fill="rgb(255 255 255 / 0.75)"
           style={{ fontSize: 14.5, fontFamily: "var(--font-sans)" }}
         >
@@ -199,6 +214,8 @@ function BlueprintDiagram({ progress }: { progress: number }) {
           const x = barX0 + i * segW;
           const visible = a.bar > i / segments.length;
           const local = clamp01((a.bar - i / segments.length) * segments.length);
+          const labelX = x + segW * 0.5;
+          const labelY = axisY + 48;
           return (
             <g key={seg.id} opacity={visible ? 0.35 + local * 0.65 : 0.15}>
               {i > 0 && (
@@ -213,17 +230,18 @@ function BlueprintDiagram({ progress }: { progress: number }) {
               {i > 0 && (
                 <line
                   x1={x}
-                  y1={axisY - 22}
+                  y1={axisY - 18}
                   x2={x}
-                  y2={axisY + 22}
+                  y2={axisY + 18}
                   stroke="rgb(255 255 255 / 0.15)"
                   strokeWidth="1"
                 />
               )}
               <text
-                x={x + segW * 0.45}
-                y={axisY + 36}
+                x={labelX}
+                y={labelY}
                 textAnchor="middle"
+                transform={upright(labelX, labelY, uprightText)}
                 fill="rgb(255 255 255 / 0.78)"
                 style={{ fontSize: 14, fontFamily: "var(--font-sans)" }}
               >
@@ -235,8 +253,9 @@ function BlueprintDiagram({ progress }: { progress: number }) {
       </g>
 
       <text
-        x={barX0 + segW * 3.05}
-        y={axisY - 64}
+        x={shipX}
+        y={shipY}
+        transform={upright(shipX, shipY, uprightText)}
         fill="rgb(255 255 255 / 0.94)"
         opacity={a.ship}
         style={{
@@ -254,15 +273,17 @@ function BlueprintDiagram({ progress }: { progress: number }) {
         const grow = clamp01(a.rings * (1.05 - lab.ring * 0.04));
         const r = fullR * grow;
         const t = clamp01((a.labels - i * 0.07) / 0.55);
-        if (r < 8) return null;
+        if (r < fullR * 0.55) return null;
         const cx = originX + r;
         const cy = axisY;
-        const pt = polar(cx, cy, r * 0.98, lab.angle);
+        const pt = polar(cx, cy, r * 1.02, lab.angle);
+        const y = Math.min(pt.y, axisY - 28);
         return (
           <text
             key={lab.text}
             x={pt.x}
-            y={pt.y}
+            y={y}
+            transform={upright(pt.x, y, uprightText)}
             fill="rgb(255 255 255 / 0.72)"
             opacity={t}
             style={{ fontSize: 13, fontFamily: "var(--font-sans)" }}
@@ -274,16 +295,18 @@ function BlueprintDiagram({ progress }: { progress: number }) {
 
       <g opacity={a.labels * 0.9}>
         <text
-          x={originX + 480}
-          y={axisY - 300}
+          x={originX + 520}
+          y={axisY - 310}
+          transform={upright(originX + 520, axisY - 310, uprightText)}
           fill="rgb(255 255 255 / 0.55)"
           style={{ fontSize: 13, fontFamily: "var(--font-sans)" }}
         >
           Staff+ engineers embedded
         </text>
         <text
-          x={originX + 520}
-          y={axisY - 268}
+          x={originX + 560}
+          y={axisY - 278}
+          transform={upright(originX + 560, axisY - 278, uprightText)}
           fill="rgb(255 255 255 / 0.55)"
           style={{ fontSize: 13, fontFamily: "var(--font-sans)" }}
         >
@@ -296,17 +319,17 @@ function BlueprintDiagram({ progress }: { progress: number }) {
 
 function Heading() {
   return (
-    <div className="relative z-10 mx-auto max-w-7xl px-6 pt-20 md:pt-24 lg:pt-28">
-      <p className="font-mono text-[12px] tracking-[0.14em] text-white/45">( Flagship )</p>
-      <div className="mt-5 flex flex-col gap-4 lg:flex-row lg:items-end lg:gap-10">
-        <h2 className="font-display text-[clamp(3.5rem,12vw,8.5rem)] font-semibold leading-[0.9] tracking-[-0.04em] text-white">
+    <div className="relative z-10 mx-auto max-w-7xl px-4 pt-12 sm:px-6 md:pt-16 lg:pt-20">
+      <p className="font-mono text-[11px] tracking-[0.14em] text-white/45 sm:text-[12px]">( Flagship )</p>
+      <div className="mt-3 flex flex-col gap-2 sm:mt-4 sm:gap-3 lg:flex-row lg:items-end lg:gap-8">
+        <h2 className="font-display text-[clamp(2.75rem,14vw,8.5rem)] font-semibold leading-[0.9] tracking-[-0.04em] text-white">
           Embed
         </h2>
-        <p className="max-w-md pb-2 font-display text-[clamp(1.15rem,2.2vw,1.65rem)] font-medium leading-snug tracking-tight text-white/80 lg:pb-4">
+        <p className="max-w-md font-display text-[clamp(1.05rem,3.8vw,1.65rem)] font-medium leading-snug tracking-tight text-white/80 lg:pb-3">
           AI CTO — a senior engineering team, on demand.
         </p>
       </div>
-      <p className="mt-6 max-w-xl text-[14.5px] leading-relaxed text-white/50 md:text-[15.5px]">
+      <p className="mt-4 max-w-xl text-[14px] leading-relaxed text-white/50 sm:mt-5 sm:text-[15px] md:text-[15.5px]">
         Embed a CoGen engineering pod inside your company. We own the AI roadmap, ship production
         systems, and stay to operate them — from first audit to durable scale.
       </p>
@@ -356,11 +379,11 @@ export function AiCtoTimeline() {
 
     const io = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && entry.intersectionRatio >= 0.28) {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.22) {
           play();
         }
       },
-      { threshold: [0.28, 0.4, 0.55] },
+      { threshold: [0.22, 0.35, 0.5] },
     );
 
     io.observe(el);
@@ -371,11 +394,13 @@ export function AiCtoTimeline() {
     };
   }, [reduceMotion]);
 
+  const mobileSize = `min(980px, calc((100vw - 2rem) * ${VB_W} / ${VB_H}))`;
+
   return (
     <section
       id="ai-cto"
       ref={sectionRef}
-      className="relative overflow-hidden border-b border-border bg-transparent transition-colors duration-1000"
+      className="relative overflow-x-hidden border-b border-border bg-transparent transition-colors duration-1000"
     >
       <div
         className="pointer-events-none absolute inset-0 opacity-50"
@@ -394,8 +419,22 @@ export function AiCtoTimeline() {
 
       <Heading />
 
-      <div className="relative z-10 mx-auto w-full max-w-[1400px] px-4 pb-24 pt-2 md:px-8 md:pb-32 md:pt-4 lg:px-10 lg:pb-36">
-        <div className="min-h-[min(70vh,700px)] w-full">
+      <div className="relative z-10 mx-auto w-full max-w-[1400px] px-4 pb-10 pt-4 sm:px-6 sm:pb-14 md:px-8 md:pb-20 lg:px-10 lg:pb-24">
+        {/* Mobile: same desktop blueprint, rotated 90° — labels stay upright */}
+        <div className="relative mx-auto w-full md:hidden" style={{ height: mobileSize }}>
+          <div
+            className="absolute left-1/2 top-1/2"
+            style={{
+              width: mobileSize,
+              transform: "translate(-50%, -50%) rotate(90deg)",
+            }}
+          >
+            <BlueprintDiagram progress={progress} uprightText />
+          </div>
+        </div>
+
+        {/* Desktop: normal horizontal */}
+        <div className="hidden w-full md:block">
           <BlueprintDiagram progress={progress} />
         </div>
       </div>

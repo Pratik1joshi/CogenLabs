@@ -439,14 +439,17 @@ function Footer() {
 export function HomePage() {
   const [introReady, setIntroReady] = useState(false);
   const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [overHero, setOverHero] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
+      const heroEl = document.getElementById("top");
       const solutionsEl = document.getElementById("solutions");
       const productsEl = document.getElementById("products");
       const caseStudiesEl = document.getElementById("case-studies");
 
       const threshold = window.innerHeight * 0.5;
+      setOverHero(!!heroEl && heroEl.getBoundingClientRect().bottom > 96);
 
       if (caseStudiesEl && caseStudiesEl.getBoundingClientRect().top <= threshold) {
         setTheme("dark");
@@ -469,10 +472,12 @@ export function HomePage() {
     };
   }, []);
 
+  const navTheme = overHero ? "dark" : theme;
+
   return (
     <div className={`min-h-screen bg-background text-foreground transition-colors duration-1000 ease-in-out ${theme === "dark" ? "dark bg-[#0a0a0a] text-white" : "bg-background text-foreground"}`}>
       <SiteIntro onComplete={() => setIntroReady(true)} />
-      <Nav introReady={introReady} theme={theme} />
+      <Nav introReady={introReady} theme={navTheme} />
       <main>
         <HeroSection />
         <TrustedBy />
