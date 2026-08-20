@@ -15,6 +15,7 @@ import { AiCtoTimeline } from "@/components/ai-cto-timeline";
 import { IndustriesIndex } from "@/components/industries-index";
 import { SiteIntro } from "@/components/site-intro";
 import { HeroSection } from "@/components/hero-section";
+import { TeamSection } from "@/components/team-section";
 
 function Nav({ introReady = true, theme = "light" }: { introReady?: boolean; theme?: "light" | "dark" }) {
   const [scrolled, setScrolled] = useState(false);
@@ -54,11 +55,11 @@ function Nav({ introReady = true, theme = "light" }: { introReady?: boolean; the
           />
         </a>
         <nav
-          className={`hidden items-center gap-8 md:flex transition-opacity duration-700 ${
+          className={`hidden items-center gap-6 lg:flex transition-opacity duration-700 ${
             introReady ? "opacity-100" : "opacity-0"
           }`}
         >
-          {["Solutions", "Products", "AI CTO", "Industries", "Insights"].map((l) => (
+          {["Solutions", "Products", "AI CTO", "Industries", "Team", "Insights"].map((l) => (
             <a
               key={l}
               href={`#${l.toLowerCase().replace(/\s+/g, "-")}`}
@@ -364,6 +365,9 @@ function Footer() {
               <a href="#ai-cto" className={`block ${linkClass}`}>
                 AI CTO
               </a>
+              <a href="#team" className={`block ${linkClass}`}>
+                Team
+              </a>
               <a href="#insights" className={`block ${linkClass}`}>
                 Insights
               </a>
@@ -487,6 +491,7 @@ export function HomePage() {
         <IndustriesIndex />
         <ProcessStickySplit />
         <CaseStudiesHorizontal />
+        <TeamSection />
         <Insights />
         <ContactCTA />
       </main>
